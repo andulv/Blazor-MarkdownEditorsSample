@@ -44,5 +44,5 @@ dotnet run --project src/MarkdownEditorsSample.Blazor/MarkdownEditorsSample.Blaz
 
 Then open the app and navigate to the editor test pages.
 
-## AI Disclainer
+## AI Disclaimer
 100% Vibe coded with GitHub Copilot, mostly Claude Opus 4.6
