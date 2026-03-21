@@ -1,0 +1,9 @@
+{
+  "theme": "light",
+  "autosaveSeconds": 15,
+  "features": {
+    "frontmatter": true,
+    "tableEditing": true,
+    "diagramSupport": false
+  }
+}

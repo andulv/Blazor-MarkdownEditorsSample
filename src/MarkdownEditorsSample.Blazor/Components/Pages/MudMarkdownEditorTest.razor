@@ -1,0 +1,78 @@
+@page "/editors/mud-markdown"
+@rendermode InteractiveServer
+@inject FileBrowserService FileBrowserService
+
+<PageTitle>MudMarkdown Test</PageTitle>
+
+<MudText Typo="Typo.h5" Class="mb-2">MudMarkdown Viewer Test</MudText>
+<MarkdownEditorInfoPanel
+    ComponentName="MudBlazor.Markdown"
+    HomepageUrl="https://mudblazor.com/components/markdown"
+    Version="9.0.0"
+    DocsUrl="https://mudblazor.com/components/markdown"
+    SamplesUrl="https://mudblazor.com/components/markdown"
+    TutorialUrl="https://github.com/MudBlazor/MudBlazor.Markdown"
+    Notes="Viewer component (not WYSIWYG editor)." />
+<MudGrid>
+    <MudItem xs="12" md="4">
+        <RepositoryFileBrowser SelectedPath="_selectedPath" SelectedPathChanged="OnSelectedPathChanged" />
+    </MudItem>
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-3 editor-pane">
+            <MudText Typo="Typo.subtitle1">@(_selectedPath ?? "(select a file)")</MudText>
+
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <MudAlert Severity="Severity.Error" Dense="true" Class="mt-2">@_error</MudAlert>
+            }
+            else if (_isLoading)
+            {
+                <MudProgressLinear Indeterminate="true" Class="mt-2" />
+            }
+            else if (string.IsNullOrWhiteSpace(_content))
+            {
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mt-2">Select a markdown/text file to render.</MudText>
+            }
+            else
+            {
+                <div class="mud-markdown mt-2">
+                    <MudMarkdown Value="@_content" />
+                </div>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string? _selectedPath;
+    private string? _content;
+    private bool _isLoading;
+    private string? _error;
+
+    private async Task OnSelectedPathChanged(string? path)
+    {
+        _selectedPath = path;
+        _error = null;
+
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            _content = null;
+            return;
+        }
+
+        try
+        {
+            _isLoading = true;
+            _content = await FileBrowserService.ReadFileAsync(path);
+        }
+        catch (Exception ex)
+        {
+            _content = null;
+            _error = ex.Message;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

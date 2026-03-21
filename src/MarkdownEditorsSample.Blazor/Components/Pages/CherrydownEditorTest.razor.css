@@ -1,0 +1,11 @@
+.editor-pane {
+    min-height: 70vh;
+}
+
+.editor-host {
+    min-height: 60vh;
+}
+
+::deep .cherry {
+    min-height: 60vh;
+}

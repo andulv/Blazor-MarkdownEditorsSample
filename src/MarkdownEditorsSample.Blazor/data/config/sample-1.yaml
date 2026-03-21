@@ -1,0 +1,9 @@
+project: MarkdownEditorsSample.Blazor
+purpose: editor-evaluation
+editors:
+  - mudmarkdown
+  - cherry
+  - toast-ui
+  - vditor
+  - milkdown
+  - tiptap

@@ -1,0 +1,73 @@
+@page "/file-browser-test"
+@rendermode InteractiveServer
+@inject FileBrowserService FileBrowserService
+
+<PageTitle>File Browser Test</PageTitle>
+
+<MudText Typo="Typo.h5" Class="mb-2">Reusable File Browser Validation</MudText>
+<MudGrid>
+    <MudItem xs="12" md="4">
+        <RepositoryFileBrowser SelectedPath="_selectedPath" SelectedPathChanged="OnSelectedPathChanged" />
+    </MudItem>
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-3">
+            <MudText Typo="Typo.subtitle1">@(_selectedPath ?? "(select a file)")</MudText>
+
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <MudAlert Severity="Severity.Error" Dense="true" Class="mt-2">@_error</MudAlert>
+            }
+            else if (_isLoading)
+            {
+                <MudProgressLinear Indeterminate="true" Class="mt-2" />
+            }
+            else if (string.IsNullOrWhiteSpace(_content))
+            {
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mt-2">Select a markdown/text file to preview.</MudText>
+            }
+            else
+            {
+                <MudTextField Value="_content"
+                              ReadOnly="true"
+                              Lines="24"
+                              FullWidth="true"
+                              Variant="Variant.Outlined"
+                              Class="mt-2" />
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string? _selectedPath;
+    private string? _content;
+    private bool _isLoading;
+    private string? _error;
+
+    private async Task OnSelectedPathChanged(string? path)
+    {
+        _selectedPath = path;
+        _error = null;
+
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            _content = null;
+            return;
+        }
+
+        try
+        {
+            _isLoading = true;
+            _content = await FileBrowserService.ReadFileAsync(path);
+        }
+        catch (Exception ex)
+        {
+            _content = null;
+            _error = ex.Message;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

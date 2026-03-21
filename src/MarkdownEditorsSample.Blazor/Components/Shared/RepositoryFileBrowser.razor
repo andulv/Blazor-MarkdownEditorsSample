@@ -1,0 +1,29 @@
+@inject FileBrowserService FileBrowserService
+
+<MudPaper Class="repo-browser pa-2" Elevation="1">
+    <MudText Typo="Typo.subtitle2" Class="mb-1">Sample Data Files</MudText>
+
+    @if (_items.Count == 0)
+    {
+        <MudText Typo="Typo.body2" Color="Color.Secondary">No supported sample files found.</MudText>
+    }
+    else
+    {
+        <MudTreeView T="string"
+                     Items="_items"
+                     Dense="true"
+                     Hover="true"
+                     ReadOnly="false"
+                     SelectedValue="SelectedPath"
+                     SelectedValueChanged="OnSelectedPathChanged">
+            <ItemTemplate>
+                <MudTreeViewItem T="string"
+                                 Value="@context.Value"
+                                 Text="@context.Text"
+                                 Icon="@context.Icon"
+                                 Expanded="@context.Expanded"
+                                 Items="@context.Children" />
+            </ItemTemplate>
+        </MudTreeView>
+    }
+</MudPaper>

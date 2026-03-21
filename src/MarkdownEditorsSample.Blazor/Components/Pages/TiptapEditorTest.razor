@@ -1,0 +1,85 @@
+@page "/editors/tiptap"
+@rendermode InteractiveServer
+@inject FileBrowserService FileBrowserService
+
+<PageTitle>Tiptap Editor Test</PageTitle>
+
+<MudText Typo="Typo.h5" Class="mb-2">Tiptap Editor Test</MudText>
+<MarkdownEditorInfoPanel
+    ComponentName="Tiptap"
+    HomepageUrl="https://tiptap.dev/"
+    Version="2 + tiptap-markdown 0.8 (esm.sh CDN)"
+    DocsUrl="https://tiptap.dev/docs"
+    SamplesUrl="https://tiptap.dev/examples/default"
+    TutorialUrl="https://github.com/ueberdosis/tiptap"
+    Notes="ProseMirror-based headless rich text editor. Markdown serialization via tiptap-markdown extension. No toolbar — keyboard shortcuts (Ctrl+B bold, Ctrl+I italic, etc.)." />
+
+<MudGrid>
+    <MudItem xs="12" md="4">
+        <RepositoryFileBrowser SelectedPath="_selectedPath" SelectedPathChanged="OnSelectedPathChanged" />
+    </MudItem>
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-3 editor-pane">
+            <MudText Typo="Typo.subtitle1">@(_selectedPath ?? "(select a file)")</MudText>
+
+            @if (!string.IsNullOrWhiteSpace(_error))
+            {
+                <MudAlert Severity="Severity.Error" Dense="true" Class="mt-2">@_error</MudAlert>
+            }
+            else if (_isLoading)
+            {
+                <MudProgressLinear Indeterminate="true" Class="mt-2" />
+            }
+            else if (string.IsNullOrWhiteSpace(_content))
+            {
+                <MudText Typo="Typo.body2" Color="Color.Secondary" Class="mt-2">Select a markdown/text file to edit.</MudText>
+            }
+            else
+            {
+                <div class="mt-2 editor-host">
+                    <TiptapMarkdownEditor Value="@_content" ValueChanged="OnEditorChanged" HeightPx="520" />
+                </div>
+            }
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string? _selectedPath;
+    private string? _content;
+    private bool _isLoading;
+    private string? _error;
+
+    private Task OnEditorChanged(string? newValue)
+    {
+        _content = newValue;
+        return Task.CompletedTask;
+    }
+
+    private async Task OnSelectedPathChanged(string? path)
+    {
+        _selectedPath = path;
+        _error = null;
+
+        if (string.IsNullOrWhiteSpace(path))
+        {
+            _content = null;
+            return;
+        }
+
+        try
+        {
+            _isLoading = true;
+            _content = await FileBrowserService.ReadFileAsync(path);
+        }
+        catch (Exception ex)
+        {
+            _content = null;
+            _error = ex.Message;
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}

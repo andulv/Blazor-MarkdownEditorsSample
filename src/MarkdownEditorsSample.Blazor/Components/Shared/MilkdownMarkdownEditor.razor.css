@@ -1,0 +1,56 @@
+.milkdown-host {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    overflow: auto;
+}
+
+::deep .milkdown {
+    min-height: 100%;
+}
+
+::deep .editor {
+    outline: none;
+    padding: 1rem;
+    line-height: 1.6;
+}
+
+::deep .editor h1, ::deep .editor h2, ::deep .editor h3,
+::deep .editor h4, ::deep .editor h5, ::deep .editor h6 {
+    margin: 0.75em 0 0.25em;
+    font-weight: 600;
+}
+
+::deep .editor h1 { font-size: 1.5em; }
+::deep .editor h2 { font-size: 1.25em; }
+::deep .editor h3 { font-size: 1.1em; }
+
+::deep .editor p { margin: 0.4em 0; }
+
+::deep .editor ul, ::deep .editor ol { padding-left: 1.5em; }
+
+::deep .editor code {
+    font-family: monospace;
+    background: rgba(0, 0, 0, 0.06);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+::deep .editor pre {
+    background: rgba(0, 0, 0, 0.06);
+    padding: 0.75em 1em;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+::deep .editor pre code {
+    background: none;
+    padding: 0;
+}
+
+::deep .editor blockquote {
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
+    margin: 0.5em 0;
+    padding: 0.25em 1em;
+    color: rgba(0, 0, 0, 0.6);
+}

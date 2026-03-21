@@ -1,0 +1,7 @@
+{
+  "documents": [
+    { "id": "md-01", "title": "Welcome Sample", "size": "small" },
+    { "id": "md-09", "title": "Long Form Sample", "size": "large" }
+  ],
+  "generatedAt": "2026-03-21T12:00:00+01:00"
+}

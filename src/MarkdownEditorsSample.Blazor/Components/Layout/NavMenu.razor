@@ -1,0 +1,72 @@
+﻿<div class="top-row ps-3 navbar navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="">MarkdownEditorsSample.Blazor</a>
+    </div>
+</div>
+
+<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+    <nav class="nav flex-column">
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="counter">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="weather">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="file-browser-test">
+                <span class="bi bi-folder2-open" aria-hidden="true"></span> File Browser Test
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editors/mud-markdown">
+                <span class="bi bi-markdown" aria-hidden="true"></span> MudMarkdown Test
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editors/cherrydown">
+                <span class="bi bi-pencil-square" aria-hidden="true"></span> Cherrydown Test
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editors/toast-ui">
+                <span class="bi bi-layout-text-window" aria-hidden="true"></span> TOAST UI Test
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editors/vditor">
+                <span class="bi bi-window" aria-hidden="true"></span> Vditor Test
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editors/milkdown">
+                <span class="bi bi-cup-hot" aria-hidden="true"></span> Milkdown Test
+            </NavLink>
+        </div>
+
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="editors/tiptap">
+                <span class="bi bi-pencil" aria-hidden="true"></span> Tiptap Test
+            </NavLink>
+        </div>
+    </nav>
+</div>
+

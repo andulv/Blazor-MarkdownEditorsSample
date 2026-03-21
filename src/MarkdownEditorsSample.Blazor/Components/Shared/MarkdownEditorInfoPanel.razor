@@ -1,0 +1,49 @@
+<MudPaper Class="pa-3 mb-3" Outlined="true">
+    <MudText Typo="Typo.subtitle2">@ComponentName</MudText>
+    <MudText Typo="Typo.body2" Color="Color.Secondary">Version: @Version</MudText>
+    <MudText Typo="Typo.body2" Class="mt-1">
+        <MudLink Href="@HomepageUrl" Target="_blank">Homepage</MudLink>
+        @if (!string.IsNullOrWhiteSpace(DocsUrl))
+        {
+            <span> | </span>
+            <MudLink Href="@DocsUrl" Target="_blank">Docs</MudLink>
+        }
+        @if (!string.IsNullOrWhiteSpace(SamplesUrl))
+        {
+            <span> | </span>
+            <MudLink Href="@SamplesUrl" Target="_blank">Samples</MudLink>
+        }
+        @if (!string.IsNullOrWhiteSpace(TutorialUrl))
+        {
+            <span> | </span>
+            <MudLink Href="@TutorialUrl" Target="_blank">Tutorial</MudLink>
+        }
+    </MudText>
+    @if (!string.IsNullOrWhiteSpace(Notes))
+    {
+        <MudText Typo="Typo.caption" Class="mt-1">@Notes</MudText>
+    }
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public string ComponentName { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string HomepageUrl { get; set; } = string.Empty;
+
+    [Parameter, EditorRequired]
+    public string Version { get; set; } = string.Empty;
+
+    [Parameter]
+    public string? DocsUrl { get; set; }
+
+    [Parameter]
+    public string? SamplesUrl { get; set; }
+
+    [Parameter]
+    public string? TutorialUrl { get; set; }
+
+    [Parameter]
+    public string? Notes { get; set; }
+}
