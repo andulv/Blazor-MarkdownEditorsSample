@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "mudblazor": {
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "/home/anders/source/agent/MudMCP/src/MudBlazor.Mcp/MudBlazor.Mcp.csproj",
+        "--",
+        "--stdio",
+        "--version",
+        "9.1.0"
+      ]
+    }
+  }
+}
